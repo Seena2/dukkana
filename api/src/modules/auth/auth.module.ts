@@ -9,15 +9,22 @@ import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
 
 @Module({
   imports: [
-    PassportModule.register({defaultStrategy:'jwt'}),
-    JwtModule.registerAsync({inject: [ConfigService], 
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.registerAsync({
+      inject: [ConfigService],
       // Note the value of JWT_SECRET and JWT_EXPIRES_IN should be set in your environment variables or .env file
-    useFactory: async (configService: ConfigService) => ({
-      secret: configService.get<string>('JWT_SECRET') ?? 'defaultSecretKey2026',
-      signOptions: { expiresIn:Number(configService.get<number>('JWT_EXPIRES_IN') ?? 3600)},
+      useFactory: (configService: ConfigService) => ({
+        secret:
+          configService.get<string>('JWT_SECRET') ?? 'defaultSecretKey2026',
+        signOptions: {
+          expiresIn: Number(
+            configService.get<number>('JWT_EXPIRES_IN') ?? 3600,
+          ),
+        },
+      }),
     }),
   ],
-  providers: [AuthService,JwtStrategy,RefreshTokenStrategy],
+  providers: [AuthService, JwtStrategy, RefreshTokenStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

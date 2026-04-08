@@ -1,5 +1,13 @@
 // Data Transfer Object (DTO) for user registration in the authentication module of a NestJS application.
-import { IsNotEmpty, IsEmail, IsString, MinLength, Matches, IsOptional } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsEmail,
+  IsString,
+  MinLength,
+  Matches,
+  IsOptional,
+} from 'class-validator';
+
 
 export class RegisterDto {
   // Define properties for user registration, such as username, email, and password

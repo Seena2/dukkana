@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
@@ -7,6 +8,7 @@ async function bootstrap() {
 
   // Global prefix for all routes
   app.setGlobalPrefix('api/v1');
+
   // Set Global data validation pipes
   app.useGlobalPipes(
     new ValidationPipe({

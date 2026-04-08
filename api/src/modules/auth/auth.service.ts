@@ -71,8 +71,7 @@ export class AuthService {
       this.jwtService.signAsync({ ...payload, refreshId }, { expiresIn: '7d' }), // Refresh token expires in 7 days
     ]);
     // Store the refresh token in the database with an association to the user (optional but recommended)
-    await this.prisma.refreshToken.create({ data: { userId, refreshId } });
-
+    // await this.prisma.refreshToken.create({ data: { userId, refreshId } });
     return { accessToken, refreshToken };
   }
 
@@ -82,13 +81,13 @@ export class AuthService {
     refreshToken: string,
   ): Promise<void> {
     // Implement logic to update the refresh token in the database for the user
-    const hashedRefreshToken = await bcrypt.hash(
+    const updatedRefreshToken = await bcrypt.hash(
       refreshToken,
       this.SALT_ROUNDS,
     );
     await this.prisma.user.update({
       where: { id: userId },
-      data: { refreshToken },
+      data: { refreshToken: updatedRefreshToken },
     });
   }
 
@@ -96,6 +95,7 @@ export class AuthService {
   async refreshTokens(userId: string): Promise<AuthResponseDto> {
     // Implement logic to validate the refresh token and generate new access and refresh tokens
     // get the user from the database using the userId and check if the refresh token is valid
+    // this.prisma.user.findUnique({ where: { refreshToken: ... } })
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -111,7 +111,7 @@ export class AuthService {
     if (!user) {
       throw new Error('User not found');
     }
-    // generate new access token and refresh token
+    // generate new access and refresh token
     const tokens = await this.generateTokens(user.id, user.email);
     // update the refresh token in the database for the user
     await this.updateRefreshToken(user.id, tokens.refreshToken);

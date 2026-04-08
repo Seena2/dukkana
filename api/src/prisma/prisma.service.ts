@@ -3,10 +3,21 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit,OnModuleDestroy {
+export class PrismaService
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
+{
   constructor() {
-    const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-    super({ adapter, log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'] });
+    const adapter = new PrismaPg({
+      connectionString: process.env.DATABASE_URL,
+    });
+    super({
+      adapter,
+      log:
+        process.env.NODE_ENV === 'development'
+          ? ['query', 'error', 'warn']
+          : ['error'],
+    });
   }
 
   async onModuleInit() {
@@ -26,9 +37,11 @@ export class PrismaService extends PrismaClient implements OnModuleInit,OnModule
       (key) => typeof key === 'string' && !key.startsWith('_'),
     );
 
-    return Promise.all(models.map((modelKey) =>{ if (typeof modelKey === `string`){
-     return this[modelKey].deleteMany();
-       }
+    return Promise.all(
+      models.map((modelKey) => {
+        if (typeof modelKey === `string`) {
+          return this[modelKey].deleteMany();
+        }
       }),
     );
   }
