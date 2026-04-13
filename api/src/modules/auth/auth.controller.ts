@@ -1,5 +1,11 @@
-import { Controller } from '@nestjs/common';
-import { Body, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { AuthResponseDto } from './dto/auth-response.dto';
@@ -33,10 +39,7 @@ export class AuthController {
     status: 429,
     description: 'Too many requests. Rate limit exceeded',
   })
-  @ApiResponse({
-    status: 500,
-    description: 'Internal Server Error',
-  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
   async register(@Body() registerDto: RegisterDto): Promise<AuthResponseDto> {
     return await this.authService.register(registerDto);
   }
@@ -44,7 +47,7 @@ export class AuthController {
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   @UseGuards(RefreshTokenGuard) // Add appropriate guard for refresh token validation route
-  @ApiBearerAuth('JWT-refresh')
+  @ApiBearerAuth('JWT-refresh') //"JWT-refresh', specified in main.ts when setting swagger docs
   @ApiOperation({
     summary: 'Refresh access token',
     description: 'Generates new access token using a valid refresh token',
@@ -65,7 +68,7 @@ export class AuthController {
   async refresh(@GetUser('id') userId: string): Promise<AuthResponseDto> {
     return await this.authService.refreshTokens(userId);
   }
-  // Logout endpoint to invalidate the refresh token (optional, depending on your implementation)
+  // Logout endpoint to invalidate the refresh token
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard) // Add appropriate guard for refresh token validation
@@ -77,7 +80,6 @@ export class AuthController {
   @ApiResponse({
     status: 200,
     description: 'User successfully logged out',
-    type: AuthResponseDto,
   })
   @ApiResponse({
     status: 401,
@@ -95,8 +97,6 @@ export class AuthController {
 
   // login endpoint for user authentication and token generation
   @Post('login')
-  @HttpCode(HttpStatus.OK)
-  @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'User login',
     description: 'Authenticates user and returns access and refresh tokens',

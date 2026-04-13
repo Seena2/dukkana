@@ -1,4 +1,4 @@
-// Data Transfer Object (DTO) for auth response
+// Data Transfer Object (DTO) for auth response object
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 
@@ -13,7 +13,7 @@ export class AuthResponseDto {
   @ApiProperty({
     description: 'Refresh token for optaing new access token',
     example:
-      'a0e6c1ebd59494712f3873d6137f2ec84977aea7c8acdaeda327bd30e0900cb3c321a76b690bfd8ba640e1a9d45d37d3be09b8467e3872abfa9149df0816e6aa',
+      'a0e6c1ebd59494712f3873d6137f2ec84977aea7c8acdaeda327bd30e0900cb3c321a76b690bfd640e1a9d4akfkuaa',
   })
   refreshToken!: string;
 

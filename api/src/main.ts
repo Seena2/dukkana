@@ -28,6 +28,7 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], //specifies permited http methods
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'], //specifies headers a frontend can send
   });
+
   // Enable Swagger documentation
   //configure API metadata on : version,description
   const config = new DocumentBuilder()

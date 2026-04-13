@@ -9,8 +9,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) {
     super();
   }
-  // canActivate method is called by NestJS to determine if the current request should be allowed to proceed or not. It checks for the presence of a valid JWT token in the request headers and validates it.   
-canActivate(context: ExecutionContext) {
+  // canActivate method is called by NestJS to determine if the current request should be allowed to proceed or not.
+  // It checks for the presence of a valid JWT token in the request headers and validates it.
+  canActivate(context: ExecutionContext) {
     return super.canActivate(context);
   }
 }
