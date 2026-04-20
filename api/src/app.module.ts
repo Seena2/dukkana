@@ -10,12 +10,21 @@ import { UsersModule } from './modules/users/users.module';
 import { CategoryModule } from './modules/category/category.module';
 import { ProductsModule } from './modules/products/products.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
+    // Global setting for application
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60, //seconds
+        limit: 10, //maximum number of request allowed per client  within set time(60s)
+      },
+    ]),
+    //Imported modules
     PrismaModule,
     AuthModule,
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     UsersModule,
     CategoryModule,
     ProductsModule,
