@@ -9,12 +9,20 @@ import { UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class RefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
-  constructor( private prisma: PrismaService, private configService: ConfigService ){
+export class RefreshTokenStrategy extends PassportStrategy(
+  Strategy,
+  'jwt-refresh',
+) {
+  constructor(
+    private prisma: PrismaService,
+    private configService: ConfigService,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: configService.get<string>('JWT_REFRESH_SECRET') ?? 'defaultSecretKey2026',
+      secretOrKey:
+        configService.get<string>('JWT_REFRESH_SECRET') ??
+        'defaultSecretKey2026',
       passReqToCallback: true, // Pass the request to the validate method to access the refresh token from the request body or headers
     });
   }
@@ -23,32 +31,52 @@ export class RefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-refres
     console.log('Validating refresh token for user:', payload);
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-      console.error('No authorization header provided for refresh token validation for user:', payload.sub);
+      console.error(
+        'No authorization header provided for refresh token validation for user:',
+        payload.sub,
+      );
       throw new UnauthorizedException('Authorization header not provided');
     }
     const refreshToken = authHeader.replace('Bearer ', '').trim();
     if (!refreshToken) {
-      console.error('No refresh token found in authorization header for user:', payload.sub);
+      console.error(
+        'No refresh token found in authorization header for user:',
+        payload.sub,
+      );
       throw new UnauthorizedException('Refresh token not provided');
     }
     // fetch the user from the database and compare the provided refresh token with the stored hashed refresh token
-    const user= await this.prisma.user.findUnique({ where: { id: payload.sub },
-      select: { id: true, email: true, firstName: true, lastName: true, role: true, createdAt: true,updatedAt: true,
+    const user = await this.prisma.user.findUnique({
+      where: { id: payload.sub },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
         password: false, // Exclude password from the returned user object
         refreshToken: true, // Include the hashed refresh token for validation
       },
     });
     if (!user || !user.refreshToken) {
-      console.error('User not found during refresh token validation for user:', payload.sub);
+      console.error(
+        'User not found during refresh token validation for user:',
+        payload.sub,
+      );
       throw new UnauthorizedException('User not found');
     }
     // Implement logic to validate the refresh token (e.g., compare with stored hashed token in the database)
-    const isValidRefreshToken = await bcrypt.compare(refreshToken, user.refreshToken);
+    const isValidRefreshToken = await bcrypt.compare(
+      refreshToken,
+      user.refreshToken,
+    );
     if (!isValidRefreshToken) {
       console.error('Invalid refresh token provided for user:', payload.sub);
       throw new UnauthorizedException('Invalid refresh token');
     }
     // If valid, return the user information to be used in the request context for issuing a new access token
-    return {id:user.id,email:user.email, role:user.role}
+    return { id: user.id, email: user.email, role: user.role };
   }
 }

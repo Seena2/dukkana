@@ -218,9 +218,7 @@ export class OrdersService {
   }
 
   // Fetch all orders for admin purpose: returns a promise of object and metadata for pagiantion
-  async fetchAllOrders(
-    queryOrdersDto: QueryOrderDto,
-  ): Promise<{
+  async fetchAllOrders(queryOrdersDto: QueryOrderDto): Promise<{
     data: OrderResponseDto[];
     total: number;
     page: number;

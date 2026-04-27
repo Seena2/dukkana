@@ -154,4 +154,3 @@ export class CartController {
     return this.cartService.mergeCart(userId, mergeCartDto.items);
   }
 }
-

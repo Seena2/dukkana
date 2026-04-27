@@ -1,7 +1,14 @@
 // DTO for creating new order
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 // Single item in the order
 class OrderItemDto {
@@ -17,8 +24,10 @@ class OrderItemDto {
 
   @ApiProperty({ description: 'price per unit', example: 49.99 })
   @IsNotEmpty()
-  @IsNumber({ maxDecimalPlaces: 2 },
-    { message: 'price must be valid number(e.g. 49.99)' })
+  @IsNumber(
+    { maxDecimalPlaces: 2 },
+    { message: 'price must be valid number(e.g. 49.99)' },
+  )
   @Type(() => Number)
   price!: number;
 }

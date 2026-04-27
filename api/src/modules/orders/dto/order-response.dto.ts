@@ -7,15 +7,18 @@ export class OrderApiResponseDto<T> {
   @ApiProperty({ description: 'Indicates if the request was successfull' })
   success!: boolean;
 
-  @ApiProperty({ description: 'Returned data: the actual response payload',
+  @ApiProperty({
+    description: 'Returned data: the actual response payload',
     type: Object,
   })
   @IsOptional()
   @IsString()
   data!: T;
 
-  @ApiProperty({ description: 'additonal context, warning, errors',
-    nullable: true, required: false,
+  @ApiProperty({
+    description: 'additonal context, warning, errors',
+    nullable: true,
+    required: false,
   })
   message?: string;
 }
@@ -64,7 +67,8 @@ export class OrderResponseDto {
   @ApiProperty()
   shippingAddress?: string;
 
-  @ApiProperty({ description: 'each items details: qty, price, etc',
+  @ApiProperty({
+    description: 'each items details: qty, price, etc',
     type: [OrderItemResponseDto],
   })
   items!: OrderItemResponseDto[];

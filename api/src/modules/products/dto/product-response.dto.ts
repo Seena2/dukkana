@@ -2,14 +2,20 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ProductResponseDto {
-  @ApiProperty({ description: 'Product ID', example: '46545646sds-4584s68sd-4654684sd'})
+  @ApiProperty({
+    description: 'Product ID',
+    example: '46545646sds-4584s68sd-4654684sd',
+  })
   id!: string;
 
   @ApiProperty({ description: 'Product name', example: 'Wireless headphone' })
   name!: string;
 
-  @ApiProperty({ description: 'Product description',
-    example: ' High quality wireless headphones with noise cancelation', nullable: true})
+  @ApiProperty({
+    description: 'Product description',
+    example: ' High quality wireless headphones with noise cancelation',
+    nullable: true,
+  })
   description?: string | null;
 
   @ApiProperty({ description: 'Product price in USD', example: 99.99 })
@@ -21,7 +27,10 @@ export class ProductResponseDto {
   @ApiProperty({ description: ' Stock keeping unit', example: 'WH-001' })
   sku!: string;
 
-  @ApiProperty({ description: ' Product image URL', example: 'https://example.com/image.jpg' })
+  @ApiProperty({
+    description: ' Product image URL',
+    example: 'https://example.com/image.jpg',
+  })
   imageUrl?: string | null;
 
   @ApiProperty({ description: ' Product category', example: 'Electronics' })

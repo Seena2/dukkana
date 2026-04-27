@@ -3,7 +3,10 @@ import { ApiProperty } from '@nestjs/swagger';
 
 // Actual payment information(Detailed payment payload returned to the client)
 export class PaymentResponseDto {
-  @ApiProperty({ description: 'payment id', example: '1215645s454sdosd4s-454sd' })
+  @ApiProperty({
+    description: 'payment id',
+    example: '1215645s454sdosd4s-454sd',
+  })
   id!: string;
   @ApiProperty({ example: 'order-123' })
   orderId!: string;
@@ -14,11 +17,14 @@ export class PaymentResponseDto {
   @ApiProperty({ example: 'usd' })
   currency!: string;
 
-  @ApiProperty({ description: 'payment status', example: 'COMPLETED',
-    enum: ['PENDING', 'COMPLETED', 'FAILED', 'CANCELLED']})
+  @ApiProperty({
+    description: 'payment status',
+    example: 'COMPLETED',
+    enum: ['PENDING', 'COMPLETED', 'FAILED', 'CANCELLED'],
+  })
   status!: string;
 
-  @ApiProperty({example: 'STRIPE', nullable: true })
+  @ApiProperty({ example: 'STRIPE', nullable: true })
   paymentMethod?: string | null;
 
   @ApiProperty({ example: 'pi_1213546846', nullable: true })
@@ -45,12 +51,16 @@ export class PaymentApiResponseDto {
 
 // Payment intent for an order
 export class CreatePaymentIntentResponse {
-  @ApiProperty({ description: 'Stripe client secret for payment confirmation,',
-    example: 'pi_165465465' })
+  @ApiProperty({
+    description: 'Stripe client secret for payment confirmation,',
+    example: 'pi_165465465',
+  })
   clientSecret!: string;
 
-  @ApiProperty({ description: 'Payment ID in database',
-    example: '2165465-454-sds4s854d65' })
+  @ApiProperty({
+    description: 'Payment ID in database',
+    example: '2165465-454-sds4s854d65',
+  })
   paymentId!: string;
 }
 
@@ -61,6 +71,9 @@ export class CreatePaymentIntentApiResponseDto {
   @ApiProperty({ type: CreatePaymentIntentResponse })
   data!: CreatePaymentIntentResponse;
 
-  @ApiProperty({ example: 'Payment intent created successfully', required: false })
+  @ApiProperty({
+    example: 'Payment intent created successfully',
+    required: false,
+  })
   message?: string;
 }

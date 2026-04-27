@@ -240,4 +240,3 @@ export class CartService {
     return this.formatCart(cart);
   }
 }
-

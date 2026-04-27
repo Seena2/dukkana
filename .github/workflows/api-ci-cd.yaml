@@ -1,0 +1,67 @@
+#Build, test and deploy NestJs API for production
+name: CI/CD Nestjs to ECR then EC2
+on:
+  workflow_dispatch: 
+  push:
+    branches: [main]
+      -main #triggers the CI/CD pipeline when code is pushed to main branch
+jobs: 
+  # CI code checks
+  ci:
+    runs-on: ubuntu-latest # the runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.14.1' #use same version utilized in devt
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./api
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+        working-directory: ./api
+
+      - name: Lint
+        run: npm run lint:ci
+        working-directory: ./api
+
+      - name: Run tests
+        run: npm test
+        working-directory: ./api
+
+      - name: NPM Audit(high severity)
+        run: npm audit --audit-level=high
+        working-directory: ./api
+
+  deploy: 
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write
+      contents: read
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      #Login to AWS via OIDC instead of AWS secret Access key w/c could be dangaerous
+      - name: Configure AWS OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{secrets.AWS_OIDC_ROLE_ARN}}
+          aws-region: ${{secrets.AWS_REGION}}
+
+      #Login to AWS ECR for Docker images
+      - name: Login to ECR
+        run: |
+          aws ecr get-login-password --region ${{secrets.AWS_REGION}} | \
+          docker login --username AWS --password-stdin ${{secrets.ECR_REPOSITORY}}
+      
+       
+
+
+

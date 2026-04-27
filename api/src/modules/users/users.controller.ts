@@ -1,5 +1,22 @@
-import { Controller, Get, UseGuards, Req, Param, Patch, Body, HttpCode, HttpStatus, Delete } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  UseGuards,
+  Req,
+  Param,
+  Patch,
+  Body,
+  HttpCode,
+  HttpStatus,
+  Delete,
+} from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/common/guards/roles.guard';
 import { UsersService } from './users.service';
@@ -35,11 +52,17 @@ export class UsersController {
   @Patch('me')
   @ApiOperation({ summary: 'Update current user profile data' })
   @ApiBody({ type: UpdateUserDto })
-  @ApiResponse({ status: 200, description: 'successfully updated user profile',
-    type: UserResponseDto,  })
+  @ApiResponse({
+    status: 200,
+    description: 'successfully updated user profile',
+    type: UserResponseDto,
+  })
   @ApiResponse({ status: 401, description: 'Unauthorize' })
   @ApiResponse({ status: 409, description: ' The email is already in use' })
-  async updateUserProfile( @GetUser('id') userId:string, @Body() updateUserDto: UpdateUserDto): Promise<UserResponseDto>{
+  async updateUserProfile(
+    @GetUser('id') userId: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<UserResponseDto> {
     return await this.usersServervice.upateUserProfile(userId, updateUserDto);
   }
 
@@ -49,17 +72,28 @@ export class UsersController {
   @ApiOperation({ summary: 'Change current user password' })
   @ApiResponse({ status: 200, description: ' Password changed successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorize' })
-  async changeUserPassword(@GetUser('id') userId:string, @Body() changePasswordDto: ChangePasswordDto): Promise<{message:string}>{
-    return await this.usersServervice.changeUserPassword(userId, changePasswordDto);
+  async changeUserPassword(
+    @GetUser('id') userId: string,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ): Promise<{ message: string }> {
+    return await this.usersServervice.changeUserPassword(
+      userId,
+      changePasswordDto,
+    );
   }
 
   // Delete current user account route
   @Delete('me')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Delete current user account' })
-  @ApiResponse({ status: 200, description: ' User account deleted successfully' })
+  @ApiResponse({
+    status: 200,
+    description: ' User account deleted successfully',
+  })
   @ApiResponse({ status: 401, description: 'Unauthorize' })
-  async deleteUserAccount( @GetUser('id') userId: string ): Promise<{ message: string }> {
+  async deleteUserAccount(
+    @GetUser('id') userId: string,
+  ): Promise<{ message: string }> {
     return await this.usersServervice.removeUserAccount(userId);
   }
 
@@ -98,7 +132,10 @@ export class UsersController {
   @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Delete user by id' })
-  @ApiResponse({ status: 200, description: 'User with specified ID deleted successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'User with specified ID deleted successfully',
+  })
   @ApiResponse({ status: 401, description: 'Unauthorize' })
   async deleteUserById(@Param('id') id: string): Promise<{ message: string }> {
     return await this.usersServervice.removeUserAccount(id);
