@@ -1,0 +1,107 @@
+.header{
+   width: 100%;
+   border-bottom: 1px solid #e4dddd;
+   position: sticky;
+   top: 0;
+   z-index: 100;
+
+   .navbar{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   }
+   .logo{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color : var(--primary-color);
+    letter-spacing: -0.02em;
+    &:hover{
+        opacity: 0.7;
+        cursor: pointer;
+
+    }
+   }
+   .menu_icons{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+   }
+   .cartButton{
+    position: relative;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+        color: var(--primary-color);
+    }
+    .cartTag{
+        position: absolute;
+        top:-6px;
+        right: -6px;
+        background: #ad2727;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 500;
+        min-width: 18px;
+        height: 18px;
+        border-radius: 9px;
+        display: flex;
+        justify-content: center;
+        padding: 0 4px;
+    }
+   }
+   .loginBtn{
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: none;
+    &:hover{
+        background: #2ab152
+    }
+    &:disabled{
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+   }
+   .logoutBtn{
+    padding: 0.5rem 1rem;
+    background: #ad2727;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: none;
+    &:hover{
+        background: #c03e3e;
+    }
+    &:disabled{
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+   }
+
+   @media (min-width:768px) {
+    .loginBtn{
+        display: inline;
+    }
+    .logoutBtn{
+        display: inline;
+    }
+    
+   }
+   
+}
