@@ -1,0 +1,32 @@
+.breadcrumb{
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #c2bebe;
+    .container{
+        min-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .navbar{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: #6b7280;
+        .link{
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.2s;
+
+            &:hover{
+                color: var(--primary-color);
+            }
+        }
+        .separator{
+            color: #18191a;
+        }
+        .current{
+            font-weight: 500;
+        }
+    }
+}

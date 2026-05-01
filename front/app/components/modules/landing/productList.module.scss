@@ -1,0 +1,80 @@
+.section{
+    width: 100%;
+    padding: 3rem 2rem;
+    min-height: 60vh;
+
+    .container{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .sectionHeader{
+        margin-bottom: 1.5rem;
+        h2{
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+        p{
+            color: #666;
+            font-size: 1rem;
+        }
+    }
+    .searchBar{
+        margin-bottom: 2rem;
+        input{
+            width: 100%;
+            max-width: 500px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            outline: none;
+            transition: border-color 0.2s;
+            &:focus{
+                border-color: #030;
+            }
+        }
+    }
+    .loading{
+        text-align: center;
+        padding: 4rem 1rem;
+        color: #666;
+    }
+    .productListGrid{
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+    .pagination{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:1rem;
+        margin-top: 3rem;
+
+        button{
+            padding: 0.5rem 1rem;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover:not(:disabled){
+                border-color: var(--primary-color);
+                background-color: var(--secondary-color);
+            }
+            &:disabled{
+                opacity: 0.5;
+                cursor:not-allowed;
+            }
+        }
+        .pageInfo{
+            font-size: 0.8rem;
+            color: #666;
+        }
+    }
+    
+}

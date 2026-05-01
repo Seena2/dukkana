@@ -1,0 +1,23 @@
+.messageContainer{
+    min-height: 60vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+    display:  flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.messageContent{
+    h2{
+        font-size: 1.6rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+    p{
+        margin: 0;
+        font-size: 1rem;
+        color: #6b7280;
+    }
+}

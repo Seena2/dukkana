@@ -23,7 +23,7 @@ async function bootstrap() {
   );
   // Enable CORS
   app.enableCors({
-    origin: process.env.ALLOWED_ORIGINS?.split(',') ?? 'http://localhost:3000', //specifies w/c domains are allowed to access the api
+    origin: process.env.ALLOWED_ORIGINS?.split(',') ?? 'http://localhost:3001', //specifies w/c domains are allowed to access the api
     credentials: true, //allows cookies and authentication headers to be sent in cors request
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], //specifies permited http methods
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'], //specifies headers a frontend can send
@@ -60,7 +60,7 @@ async function bootstrap() {
       },
       '-JWT-refresh',
     )
-    .addServer('http://localhost:3000', 'Development server')
+    .addServer('http://localhost:3001', 'Development server')
     .build(); //builds the doc
 
   const document = SwaggerModule.createDocument(app, config);
@@ -80,8 +80,10 @@ async function bootstrap() {
     .swagger-ui .info .title{color:#4a90E2;}
      `,
   });
-
-  await app.listen(process.env.PORT ?? 3000);
+  // Set the port where the server
+  const PORT = process.env.PORT ?? 3001;
+  await app.listen(PORT);
+  console.log(`The server started on the port ${PORT}`);
 }
 bootstrap().catch((error) => {
   Logger.error('Error starting the application:', error);

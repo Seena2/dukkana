@@ -1,13 +1,15 @@
-import Image from "next/image";
-import Header from "../components/modules/landing/Header";
-import Footer from "../components/modules/landing/Footer";
+import Header from "../components/navbar/Header";
+import Footer from "../components/footer/Footer";
+import ProductList from "../components/modules/landing/ProductList";
 
 export default function Home() {
   return (
-  <div>
-    <Header/>
-    <main><h3>content</h3></main>
-    <Footer/>
-  </div>
+    <div>
+      <Header />
+      <main style={{ minHeight: "70vh" }}>
+        <ProductList />
+      </main>
+      <Footer />
+    </div>
   );
 }

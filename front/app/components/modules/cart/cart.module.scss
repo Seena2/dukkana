@@ -1,0 +1,35 @@
+.section{
+    min-height: 60vh;
+    padding: 3rem 0;
+    background: #fafafa;
+}
+.containter{
+    min-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h2{
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    .clearButton{
+        padding: 0.6rem 1rem;
+        background-color: transparent;
+        color: #dc2626;
+        border: 1px solid #dc2626;
+        border-radius: 5px;
+        font-weight: 400;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        &:hover{
+            background: #dc2626;
+            color: #fff;
+        }
+    }
+}
