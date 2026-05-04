@@ -1,0 +1,128 @@
+.checkoutSection{
+    min-height: 80vh;
+    padding: 3rem 0;
+    background-color: #fafafa;
+}
+.container{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.header{
+    text-align: center;
+    margin-bottom: 2rem;
+    h1{
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #000;
+    }
+    p{
+        color:#666;
+        font-size: 1rem;
+    }
+}
+.steps{
+    display :flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding: 0 2rem;
+    gap:2rem;
+
+    }
+
+.stepsWrapper{
+    display: flex;
+    align-items: center;
+    flex:1;
+
+    .step{
+       
+
+        .stepNumber{
+            width:48px;
+            height:48px;
+            border-radius: 50%;
+            background: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            transition: all 0.3s ease;
+            color: #999;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .stepCaption{
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+    }
+
+    .activeStep .stepNumber{
+        background-color: #000;
+        color: #fff;
+    }
+    .activeStep .stepCaption{
+        color: #000;
+    }
+    .completedStep .stepNumber{
+        background-color: var(--primary-color);
+        color:#fff;
+    }
+    .stepConnector{
+        flex: 1;
+        height: 2px;
+        background-color: #e5e5e5;
+        align-items: center;
+        margin-bottom: 1.3rem;
+    }
+}
+.container{
+
+ h2{
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+}
+
+
+.summary{
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    
+    h3{
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color:#000
+    }
+    .row{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.7rem;
+        font-size: 1rem;
+
+        span:last-child{
+            color: #000;
+            font-weight: 500;
+        }
+    }
+    .divider{
+        border: none;
+        border-top: 2px solid #c9c6c6;
+        margin: 1rem 0;
+    }
+    .summaryTotal{
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+}

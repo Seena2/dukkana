@@ -33,3 +33,104 @@
         }
     }
 }
+.content{
+    display:  grid;
+    grid-template-columns: 1fr 380px;
+    gap: 2rem;
+    align-items: start;
+
+    @media (max-width:968px) {
+        grid-template-columns: 1fr;
+    }
+    .itemsList{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+.emptyCart{
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    h3{
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+    .continueBtn{
+        background: var(--primary-color);
+        padding: 0.5rem 1rem;
+        color: #fff;
+        border-radius: 6px;
+    }
+}
+.summary{
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    padding: 1.5rem;
+    position: sticky;
+    top: 100px;
+    h2{
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+    .summaryRow{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+        font-size: 0.8rem;
+        color: #666;
+
+        span{
+            font-weight: 500;
+        }
+    }
+    .dividerLine{
+        border: none;
+        border-top: 1px solid #efefef;
+        margin: 1rem 0;
+    }
+    .total{
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color:#000;
+    }
+    .checkoutbutton{
+        width: 100%;
+        padding: 0.4rem 1rem;
+        background-color: var(--primary-color);
+        color:#fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 0.6rem;
+
+        &:hover{
+            background-color: var(--secondary-color);
+        }
+    }
+    .shipBtn{
+        display: block;
+        text-align: center;
+        color:#666;
+        text-decoration: underline;
+       
+        transition: all 0.2s ease;
+       
+
+        &:hover{
+            color:#000;
+        }
+    }
+}

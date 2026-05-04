@@ -24,7 +24,7 @@ const storage =
     ? createWebStorage("local")
     : createNoopStorage();
 // data you want to persist on stroge when page reloaded
-const persistConfig = { key: "root", storage, whilelist: ["cart"] };
+const persistConfig = { key: "root", storage, whitelist: ["cart", "auth"] };
 // combine all reducers into one root reducer
 const rootReducer = combineReducers({
   auth: authReducer,

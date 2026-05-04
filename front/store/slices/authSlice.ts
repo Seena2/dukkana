@@ -14,20 +14,33 @@ const initialState:AuthStatetype = {
     isAuthenticated: false,
 }
 const authSlice = createSlice({
-    name: 'auth',
-    initialState,
-    reducers: {
-        setAccessToken(state, action: PayloadAction<string>){
-            state.accessToken = action.payload;
-        },
-        clearAuth(state){
-            state.accessToken=null;
-            state.refreshToken=null;
-            state.user=null;
-            state.isAuthenticated=false;
-        }
-    }
-})
+  name: "auth",
+  initialState,
+  reducers: {
+    setAccessToken(state, action: PayloadAction<string>) {
+      state.accessToken = action.payload;
+    },
+    setAuth: (
+      state,
+      action: PayloadAction<{
+        accessToken: string;
+        refreshToken: string;
+        user: User;
+      }>,
+    ) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      state.user = action.payload.user;
+      state.isAuthenticated = true;
+    },
+    clearAuth(state) {
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.user = null;
+      state.isAuthenticated = false;
+    },
+  },
+});
 
-export const {setAccessToken,clearAuth} = authSlice.actions;
+export const { setAccessToken, setAuth, clearAuth } = authSlice.actions;
 export default authSlice.reducer;
